@@ -107,11 +107,12 @@ img { max-width: 100%; }
 .hero h1 {
   font-family: var(--serif);
   font-weight: 500;
-  font-size: 82px;
+  font-size: clamp(28px, 8.5vw, 82px);
   line-height: .98;
   letter-spacing: -.01em;
   color: var(--ink);
   margin: 0 0 30px;
+  white-space: nowrap;
 }
 .hero-copy p {
   font-size: 19px;
@@ -373,7 +374,6 @@ img { max-width: 100%; }
     padding-left: 8%;
     padding-right: 8%;
   }
-  .hero h1 { font-size: 64px; }
   .process-grid { grid-template-columns: repeat(3, 1fr); gap: 32px 24px; }
 }
 
@@ -397,7 +397,6 @@ img { max-width: 100%; }
   .trusted-by-track { gap: 28px; font-size: 20px; }
   .nav { flex-wrap: wrap; gap: 16px; }
   .nav-links { gap: 20px; flex-wrap: wrap; margin-left: 0; }
-  .hero h1 { font-size: 44px; }
   .hero-copy p { font-size: 17px; max-width: none; }
   .approach-inner h2, .perspectives-heading, .partners-heading, .process-heading, .work-head h2 { font-size: 28px; }
   .process-grid { grid-template-columns: 1fr 1fr; gap: 32px 20px; }
