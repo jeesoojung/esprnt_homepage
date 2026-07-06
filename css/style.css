@@ -296,7 +296,7 @@ img { max-width: 100%; }
   margin-bottom: 24px;
 }
 .partner-image img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease; }
-.partner-card:hover .partner-image img { transform: scale(1.03); }
+.partner-card:hover .partner-image img { transform: scale(1.1); }
 .partner-card h3 {
   font-family: var(--serif);
   font-size: 30px;
