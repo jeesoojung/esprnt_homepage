@@ -1,4 +1,30 @@
 (function () {
+  var toggle = document.querySelector('.lang-toggle');
+  if (!toggle) return;
+  var hash = window.location.hash;
+  var segments = window.location.pathname.split('/');
+  var enIndex = segments.indexOf('en');
+  var target, label;
+  if (enIndex !== -1) {
+    segments.splice(enIndex, 1);
+    target = segments.join('/') || '/';
+    label = 'KOR';
+  } else {
+    var lastIndex = segments.length - 1;
+    if (segments[lastIndex] === '') {
+      segments[lastIndex] = 'en';
+      segments.push('');
+    } else {
+      segments.splice(lastIndex, 0, 'en');
+    }
+    target = segments.join('/');
+    label = 'ENG';
+  }
+  toggle.textContent = label;
+  toggle.setAttribute('href', (target || '/') + hash);
+})();
+
+(function () {
   var nav = document.querySelector('.nav');
   if (nav) {
     var setScrollOffset = function () {
