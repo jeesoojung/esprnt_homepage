@@ -1,27 +1,39 @@
 (function () {
-  var toggle = document.querySelector('.lang-toggle');
-  if (!toggle) return;
+  var buttons = document.querySelectorAll('.lang-btn');
+  if (!buttons.length) return;
+
+  var knownLangs = ['en', 'ja'];
   var hash = window.location.hash;
   var segments = window.location.pathname.split('/');
-  var enIndex = segments.indexOf('en');
-  var target, label;
-  if (enIndex !== -1) {
-    segments.splice(enIndex, 1);
-    target = segments.join('/') || '/';
-    label = 'KOR';
-  } else {
-    var lastIndex = segments.length - 1;
-    if (segments[lastIndex] === '') {
-      segments[lastIndex] = 'en';
-      segments.push('');
-    } else {
-      segments.splice(lastIndex, 0, 'en');
+  var current = 'ko';
+
+  knownLangs.forEach(function (code) {
+    var idx = segments.indexOf(code);
+    if (idx !== -1) {
+      segments.splice(idx, 1);
+      current = code;
     }
-    target = segments.join('/');
-    label = 'ENG';
-  }
-  toggle.textContent = label;
-  toggle.setAttribute('href', (target || '/') + hash);
+  });
+  var basePath = segments.join('/') || '/';
+
+  var pathFor = function (code) {
+    if (code === 'ko') return basePath;
+    var segs = basePath.split('/');
+    var lastIndex = segs.length - 1;
+    if (segs[lastIndex] === '') {
+      segs[lastIndex] = code;
+      segs.push('');
+    } else {
+      segs.splice(lastIndex, 0, code);
+    }
+    return segs.join('/');
+  };
+
+  buttons.forEach(function (btn) {
+    var code = btn.getAttribute('data-lang');
+    btn.classList.toggle('is-active', code === current);
+    btn.setAttribute('href', (pathFor(code) || '/') + hash);
+  });
 })();
 
 (function () {
