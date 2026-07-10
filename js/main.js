@@ -77,3 +77,26 @@
     observer.observe(section);
   });
 })();
+
+/* work gallery: tap to reveal detail overlay on touch devices */
+(function () {
+  var items = document.querySelectorAll('.work-item');
+  if (!items.length) return;
+
+  var isTouch = window.matchMedia('(hover: none)').matches;
+  if (!isTouch) return;
+
+  items.forEach(function (item) {
+    item.addEventListener('click', function () {
+      var wasActive = item.classList.contains('is-active');
+      items.forEach(function (other) { other.classList.remove('is-active'); });
+      if (!wasActive) item.classList.add('is-active');
+    });
+  });
+
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.work-item')) {
+      items.forEach(function (item) { item.classList.remove('is-active'); });
+    }
+  });
+})();

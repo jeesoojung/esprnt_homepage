@@ -392,7 +392,8 @@ img { max-width: 100%; }
   background: repeating-linear-gradient(135deg, #eeedea 0 12px, #e4e3df 12px 24px);
   transition: transform .5s ease;
 }
-.work-item:hover .work-image-media { transform: scale(1.06); }
+.work-item:hover .work-image-media,
+.work-item.is-active .work-image-media { transform: scale(1.06); }
 .work-placeholder {
   position: relative;
   z-index: 1;
@@ -414,7 +415,8 @@ img { max-width: 100%; }
   opacity: 0;
   transition: opacity .3s ease, background .3s ease;
 }
-.work-item:hover .work-overlay {
+.work-item:hover .work-overlay,
+.work-item.is-active .work-overlay {
   opacity: 1;
   background: rgba(22, 24, 29, .55);
 }
