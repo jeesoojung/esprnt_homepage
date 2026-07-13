@@ -113,20 +113,21 @@
     return path === here && link.hash && document.querySelector(link.hash);
   };
 
-  var easeInOutCubic = function (t) {
-    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  var easeInOutSine = function (t) {
+    return -(Math.cos(Math.PI * t) - 1) / 2;
   };
 
   var scrollTo = function (targetY) {
     var startY = window.pageYOffset;
     var diff = targetY - startY;
-    var duration = Math.min(1100, Math.max(500, Math.abs(diff) * 0.6));
+    // longer trips get more time so per-frame movement stays gentle
+    var duration = Math.min(1700, Math.max(550, Math.abs(diff) * 0.32 + 350));
     var start = null;
 
     var step = function (ts) {
       if (start === null) start = ts;
       var progress = Math.min((ts - start) / duration, 1);
-      window.scrollTo({ top: startY + diff * easeInOutCubic(progress), behavior: 'auto' });
+      window.scrollTo({ top: startY + diff * easeInOutSine(progress), behavior: 'auto' });
       if (progress < 1) requestAnimationFrame(step);
     };
     requestAnimationFrame(step);
