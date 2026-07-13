@@ -38,7 +38,9 @@
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+/* anchor scrolling is handled by JS (js/main.js) for a gentler easing;
+   keep native behavior instant to avoid fighting the JS animation */
+html { scroll-behavior: auto; }
 
 body {
   margin: 0;

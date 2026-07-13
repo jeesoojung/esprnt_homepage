@@ -133,12 +133,23 @@
     requestAnimationFrame(step);
   };
 
+  // reveal every section instantly so their fade-in transitions don't
+  // stutter against the scroll animation as we pass through them
+  var revealAllSections = function () {
+    document.querySelectorAll('main > section').forEach(function (section) {
+      section.style.transition = 'none';
+      section.style.opacity = '1';
+      section.style.transform = 'none';
+    });
+  };
+
   document.querySelectorAll('a[href*="#"]').forEach(function (link) {
     if (!samePageHash(link)) return;
     link.addEventListener('click', function (e) {
       var target = document.querySelector(link.hash);
       if (!target) return;
       e.preventDefault();
+      revealAllSections();
       var offset = nav ? nav.offsetHeight + 12 : 0;
       var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
       scrollTo(top);
